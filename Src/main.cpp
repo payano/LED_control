@@ -109,10 +109,10 @@ int main(void)
   settings.channels.push_back(TIM_CHANNEL_3);
   settings.channels.push_back(TIM_CHANNEL_4);
   PWMHandler pwms(&settings);
-  pwms.setBrightness(TIM_CHANNEL_1,90);
-  pwms.setBrightness(TIM_CHANNEL_2,70);
-  pwms.setBrightness(TIM_CHANNEL_3,40);
-  pwms.setBrightness(TIM_CHANNEL_4,10);
+  pwms.setDutyCycle(TIM_CHANNEL_1,90);
+  pwms.setDutyCycle(TIM_CHANNEL_2,70);
+  pwms.setDutyCycle(TIM_CHANNEL_3,40);
+  pwms.setDutyCycle(TIM_CHANNEL_4,10);
 
   while (1)
   {

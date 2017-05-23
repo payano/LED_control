@@ -30,7 +30,7 @@ private:
 public:
 	TIM_HandleTypeDef timer;
 	PWMHandler(PWM_settings *settings);
-	void setBrightness(uint32_t, int value);
+	void setDutyCycle(uint32_t, int value);
 	virtual ~PWMHandler();
 };
 

@@ -10,7 +10,7 @@
 
 PWMHandler::PWMHandler(PWM_settings *settings){
 	// TODO Auto-generated constructor stub
-	this->timer.Instance = TIM1;
+	this->timer.Instance = TIM1; //TODO CHANGE THIS.
 	this->timer.Init.Prescaler = (uint32_t)(SystemCoreClock / 130000);
 	this->timer.Init.CounterMode = TIM_COUNTERMODE_UP;
 	this->timer.Init.Period = 100;
@@ -31,12 +31,11 @@ PWMHandler::PWMHandler(PWM_settings *settings){
 		//_Error_Handler(__FILE__, __LINE__);
 	}
 
+	//Configure PWM for all channels
 	for(std::vector<uint32_t>::iterator it = settings->channels.begin(); it != settings->channels.end(); ++it) {
 		TIM_OC_InitTypeDef *oc_timer = new TIM_OC_InitTypeDef;
 		this->initChannelConfig(oc_timer);
 		HAL_TIM_PWM_ConfigChannel(&this->timer, oc_timer, TIM_CHANNEL_1);
-		//HAL_TIM_PWM_Start_IT(&timer, *it);
-
 		this->channels.insert(std::pair<uint32_t,TIM_OC_InitTypeDef>(*it, *oc_timer));
 
 	}
@@ -104,7 +103,10 @@ void PWMHandler::initChannelConfig(TIM_OC_InitTypeDef *timer){
 
 }
 
-void PWMHandler::setBrightness(uint32_t channel, int value){
+void PWMHandler::setDutyCycle(uint32_t channel, int value){
+	//TODO - Fix loading from its own Config.
+	//or use a shared one with only pulse stored as different.
+
 	//TIM_OC_InitTypeDef channelConfig = this->channels.at(channel);
 	//channelConfig.Pulse = value;
 	//HAL_TIM_PWM_ConfigChannel(&this->timer, &channelConfig, channel);
